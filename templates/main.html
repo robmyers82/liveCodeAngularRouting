@@ -1,0 +1,50 @@
+
+<div ng-hide="isLoggedIn">
+	<h1>Welcome to the Question Directory!</h1>
+	<a href="#/login">Please Login</a>
+</div>
+<div ng-show="isLoggedIn">
+	It's time to add a User!
+
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-4 col-sm-offset-4">
+				<input type="text" class="form-control" ng-model="newStudent.name" placeholder="name">
+				<input type="text" class="form-control" ng-model="newStudent.class" placeholder="class">
+				<input type="text" class="form-control" ng-model="newStudent.question" placeholder="question">
+				<button class="btn btn-lg btn-block btn-success" ng-click="addStudent()">
+					Add Student!
+				</button>
+			</div>
+
+			<div class="col-sm-12">
+				<p>List of Student Questions:</p>
+				<p ng-repeat="student in studentsList">
+					<strong>{{student.name}} from {{student.class}}:</strong> {{student.question}} <button class="btn btn-info" ng-click="showUpdateStudent(student.$id)">Update</button>
+				</p>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div id="updateModal" class="modal fade" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Update</h4>
+      </div>
+      <div class="modal-body">
+        <input type="text" class="form-control" ng-model="updateStudent.name" placeholder="name">
+		<input type="text" class="form-control" ng-model="updateStudent.class" placeholder="class">
+		<input type="text" class="form-control" ng-model="updateStudent.question" placeholder="question">
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button class="btn btn-lg btn-block btn-success" ng-click="updateTheStudent(updateStudent)">
+			Update Student!
+		</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
