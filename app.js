@@ -10,9 +10,12 @@ angular.module('livecode').config(function($routeProvider) {
 		templateUrl: 'templates/main.html',
 		controller: 'MainController',
 		resolve: {
-			AuthLogged: function(Auth) {
-	            return Auth.isLoggedIn();
-	        }
+			// AuthLogged: function(Auth) {
+	  //           return Auth.isLoggedIn();
+	  //       }
+	  		AuthWaitForLogged: function(Auth) {
+	  			return Auth.getAuth().$waitForSignIn();
+	  		}
 		}
 	})
 	.when('/about', {

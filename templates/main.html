@@ -4,6 +4,13 @@
 	<a href="#/login">Please Login</a>
 </div>
 <div ng-show="isLoggedIn">
+
+	<p>{{welcomeMessage}}</p>
+
+	<p><button ng-click="checkSpencer()">Check for Spencer</button></p>
+
+	<p>This is the result of checkSpencer: {{currentStudent.name}}</p>
+
 	It's time to add a User!
 
 	<div class="container">

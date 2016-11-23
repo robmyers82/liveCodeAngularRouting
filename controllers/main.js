@@ -1,7 +1,27 @@
-angular.module('livecode').controller('MainController', function($scope, AuthLogged, Student) {
+angular.module('livecode').controller('MainController', function($scope, Auth, AuthWaitForLogged, Student) {
 	
-	$scope.isLoggedIn = AuthLogged;
+	if (AuthWaitForLogged == null) {
+
+		// nobody is logged in
+		$scope.isLoggedIn = false;
+	}
+	else {
+
+		// somebody is logged in
+		$scope.isLoggedIn = true;
+		$scope.currentUser = Auth.checkUser(AuthWaitForLogged);
+		
+		$scope.welcomeMessage = "Hey "+$scope.currentUser.display_name;
+	}
+
+	console.log('isLoggedIn');
+	console.log($scope.isLoggedIn);
+
 	$scope.studentsList = Student.getStudents();
+
+	$scope.checkSpencer = function() {
+		$scope.currentStudent = Student.checkSpencer();
+	};
 
 	$scope.addStudent = function() {
 

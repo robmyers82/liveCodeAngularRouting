@@ -20,6 +20,16 @@ angular.module('livecode').factory('Student', function($firebaseArray, $firebase
 		saveStudent: function(theStudent) {
 			return theStudent.$save();
 		},
+
+		checkSpencer: function() {
+			var spencerRef = studentRef.child('-KX76sTC5sPdonN1PoPO');
+			var spencer = $firebaseObject(spencerRef);
+			return spencer.$loaded().then(function(data) {
+				console.log("This is Spencer's name: "+spencer.name);
+				console.log(spencer);
+			 	return data;
+			});
+		},
 	};
 
 	Student.students = $firebaseArray(studentRef);

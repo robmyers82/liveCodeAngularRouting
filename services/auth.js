@@ -1,4 +1,4 @@
-angular.module('livecode').factory('Auth', function($firebaseAuth) {
+angular.module('livecode').factory('Auth', function($firebaseAuth, $firebaseObject) {
 
 	var auth = $firebaseAuth();
 	var loggedIn = false;
@@ -22,7 +22,25 @@ angular.module('livecode').factory('Auth', function($firebaseAuth) {
 
 		isLoggedIn: function() {
 			return Auth.user != {};
-		}
+		},
+
+		getAuth: function() {
+			return auth;
+		},
+
+		checkUser: function(user) {
+			var ref = firebase.database().ref().child('profiles').child(user.uid);
+			var theUser = $firebaseObject(ref);
+			theUser.display_name = user.displayName;
+			theUser.email = user.email;
+			theUser.$save();
+
+			return theUser;
+		},
+
+		logout: function() {
+			return auth.$signOut();
+		},
 	};
 
 	return Auth;
