@@ -1,6 +1,16 @@
-angular.module('livecode').controller('LoginController', function($scope, Auth, AuthLogged) {
+angular.module('livecode').controller('LoginController', function($scope, Auth, AuthWaitForLogged) {
 
-	$scope.isLoggedIn = AuthLogged;
+	if (AuthWaitForLogged == null) {
+
+		// nobody is logged in
+		$scope.isLoggedIn = false;
+	}
+	else {
+
+		// somebody is logged in
+		$scope.isLoggedIn = true;
+		$scope.currentUser = Auth.checkUser(AuthWaitForLogged);
+	}
 
 	$scope.loginWithFacebook = function() {
 		

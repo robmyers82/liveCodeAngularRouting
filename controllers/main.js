@@ -10,8 +10,6 @@ angular.module('livecode').controller('MainController', function($scope, Auth, A
 		// somebody is logged in
 		$scope.isLoggedIn = true;
 		$scope.currentUser = Auth.checkUser(AuthWaitForLogged);
-		
-		$scope.welcomeMessage = "Hey "+$scope.currentUser.display_name;
 	}
 
 	console.log('isLoggedIn');

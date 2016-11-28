@@ -10,9 +10,6 @@ angular.module('livecode').config(function($routeProvider) {
 		templateUrl: 'templates/main.html',
 		controller: 'MainController',
 		resolve: {
-			// AuthLogged: function(Auth) {
-	  //           return Auth.isLoggedIn();
-	  //       }
 	  		AuthWaitForLogged: function(Auth) {
 	  			return Auth.getAuth().$waitForSignIn();
 	  		}
@@ -26,9 +23,9 @@ angular.module('livecode').config(function($routeProvider) {
 		templateUrl: 'templates/login.html',
 		controller: 'LoginController',
 		resolve: {
-			AuthLogged: function(Auth) {
-	            return Auth.isLoggedIn();
-	        }
+	  		AuthWaitForLogged: function(Auth) {
+	  			return Auth.getAuth().$waitForSignIn();
+	  		}
 		}
 	})
 	.otherwise('/')
